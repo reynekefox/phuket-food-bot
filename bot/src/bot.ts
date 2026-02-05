@@ -34,7 +34,8 @@ export const createBot = (token: string) => {
     // Handle web app data (orders from Mini App)
     bot.on('web_app_data', async (ctx) => {
         try {
-            const data = JSON.parse(ctx.webAppData?.data || '{}');
+            const rawData = ctx.webAppData?.data;
+            const data = JSON.parse(typeof rawData === 'string' ? rawData : '{}');
             console.log('Received order from Mini App:', data);
 
             // Order will be processed via API server

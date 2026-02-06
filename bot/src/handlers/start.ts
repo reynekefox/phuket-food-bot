@@ -1,28 +1,35 @@
 import { Context } from 'telegraf';
-import { mainKeyboard } from '../keyboards/main.js';
-
-const WELCOME_MESSAGE = `
-🍜 *Добро пожаловать в Phuket Food Delivery!*
-
-Мы доставляем вкусную тайскую еду прямо к вашей двери.
-
-*Что умеет этот бот:*
-🍽 Просмотр меню с фото и ценами
-🛒 Удобная корзина покупок
-📍 Информация о локации и доставке
-💳 Различные способы оплаты
-
-Нажмите *Меню* чтобы выбрать блюда!
-`;
+import { languageKeyboard, mainKeyboard } from '../keyboards/main.js';
+import { t, setUserLanguage, translations, Language } from '../i18n/index.js';
 
 export const handleStart = async (ctx: Context) => {
-    await ctx.replyWithMarkdown(WELCOME_MESSAGE, mainKeyboard());
+    // Show language selection first
+    await ctx.replyWithMarkdown(
+        translations.ru.selectLanguage,
+        languageKeyboard()
+    );
+};
+
+export const handleLanguageSelect = async (ctx: Context, lang: Language) => {
+    const userId = ctx.from?.id;
+    if (!userId) return;
+
+    setUserLanguage(userId, lang);
+
+    await ctx.answerCbQuery();
+    await ctx.editMessageText(t(userId, 'welcome'), {
+        parse_mode: 'Markdown',
+        ...mainKeyboard(userId),
+    });
 };
 
 export const handleBackToMenu = async (ctx: Context) => {
+    const userId = ctx.from?.id;
+    if (!userId) return;
+
     await ctx.answerCbQuery();
-    await ctx.editMessageText(WELCOME_MESSAGE, {
+    await ctx.editMessageText(t(userId, 'welcome'), {
         parse_mode: 'Markdown',
-        ...mainKeyboard(),
+        ...mainKeyboard(userId),
     });
 };

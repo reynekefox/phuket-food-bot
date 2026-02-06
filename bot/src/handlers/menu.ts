@@ -1,61 +1,59 @@
 import { Context } from 'telegraf';
 import { backKeyboard } from '../keyboards/main.js';
-
-const LOCATION_MESSAGE = `
-📍 *Наша локация*
-
-🏠 Адрес: Phuket Town, Thalang Road 123
-📞 Телефон: +66 XX XXX XXXX
-
-🕐 Время работы:
-Пн-Вс: 10:00 - 22:00
-`;
-
-const DELIVERY_MESSAGE = `
-🚚 *Информация о доставке*
-
-⏱ Время доставки: 30-60 минут
-📦 Минимальный заказ: 500 ฿
-🆓 Бесплатная доставка от 1000 ฿
-
-*Зоны доставки:*
-• Phuket Town - 50 ฿
-• Patong - 100 ฿
-• Kata/Karon - 100 ฿
-• Rawai/Chalong - 80 ฿
-`;
-
-const PAYMENT_MESSAGE = `
-💳 *Способы оплаты*
-
-• 💵 Наличные курьеру
-• 💳 Банковская карта
-• 📱 PromptPay
-• 🏦 Банковский перевод
-
-Оплата при получении или онлайн!
-`;
+import { t } from '../i18n/index.js';
 
 export const handleLocation = async (ctx: Context) => {
+    const userId = ctx.from?.id;
+    if (!userId) return;
+
     await ctx.answerCbQuery();
-    await ctx.editMessageText(LOCATION_MESSAGE, {
+    await ctx.editMessageText(t(userId, 'location'), {
         parse_mode: 'Markdown',
-        ...backKeyboard(),
+        ...backKeyboard(userId),
     });
 };
 
 export const handleDelivery = async (ctx: Context) => {
+    const userId = ctx.from?.id;
+    if (!userId) return;
+
     await ctx.answerCbQuery();
-    await ctx.editMessageText(DELIVERY_MESSAGE, {
+    await ctx.editMessageText(t(userId, 'delivery'), {
         parse_mode: 'Markdown',
-        ...backKeyboard(),
+        ...backKeyboard(userId),
     });
 };
 
 export const handlePayment = async (ctx: Context) => {
+    const userId = ctx.from?.id;
+    if (!userId) return;
+
     await ctx.answerCbQuery();
-    await ctx.editMessageText(PAYMENT_MESSAGE, {
+    await ctx.editMessageText(t(userId, 'payment'), {
         parse_mode: 'Markdown',
-        ...backKeyboard(),
+        ...backKeyboard(userId),
+    });
+};
+
+export const handleGallery = async (ctx: Context) => {
+    const userId = ctx.from?.id;
+    if (!userId) return;
+
+    await ctx.answerCbQuery();
+    // For now, just show a placeholder - you can add gallery photos later
+    await ctx.editMessageText('🖼 *Галерея / Gallery*\n\nФотографии интерьера скоро будут добавлены!\nInterior photos coming soon!', {
+        parse_mode: 'Markdown',
+        ...backKeyboard(userId),
+    });
+};
+
+export const handleContact = async (ctx: Context) => {
+    const userId = ctx.from?.id;
+    if (!userId) return;
+
+    await ctx.answerCbQuery();
+    await ctx.editMessageText('💬 *Связаться с менеджером / Contact Manager*\n\nНапишите нам: @your_manager\nContact us: @your_manager', {
+        parse_mode: 'Markdown',
+        ...backKeyboard(userId),
     });
 };

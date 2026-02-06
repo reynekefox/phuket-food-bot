@@ -9,12 +9,6 @@ const categoryNames: Record<string, string> = {
     pancakes: '🥞 Блинчики',
     syrniki: '🧀 Сырники',
     porridge: '🥣 Каши',
-    soups: 'Супы',
-    main: 'Горячие блюда',
-    noodles: 'Лапша',
-    salads: 'Салаты',
-    desserts: 'Десерты',
-    drinks: 'Напитки',
 };
 
 const DishList = () => {

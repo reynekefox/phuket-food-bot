@@ -126,7 +126,7 @@ const dishes: Dish[] = [
         description: '2 шт. · ветчина · сыр · зелень',
         weight: '220 г',
         price: 240,
-        photo: 'https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=400&h=300&fit=crop',
+        photo: 'https://images.unsplash.com/photo-1595981267035-d76e70e5e740?w=400&h=300&fit=crop',
         categoryId: 'pancakes',
     },
     {

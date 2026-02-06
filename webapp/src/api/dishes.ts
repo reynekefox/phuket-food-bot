@@ -134,7 +134,7 @@ const dishes: Dish[] = [
         description: 'Молоко (коровье / кокосовое) · рис жасмин · манго',
         weight: '300 г',
         price: 100,
-        photo: 'https://images.unsplash.com/photo-1546548970-71785318a17b?w=400&h=300&fit=crop',
+        photo: 'https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?w=400&h=300&fit=crop',
         categoryId: 'porridge',
     },
 ];

@@ -125,7 +125,7 @@ const dishes: Dish[] = [
         description: 'Молоко (коровье / кокосовое) · овсянка · микс свежих ягод',
         weight: '300 г',
         price: 100,
-        photo: 'https://images.unsplash.com/photo-1517673400267-0251440c45dc?w=400&h=300&fit=crop',
+        photo: 'https://images.unsplash.com/photo-1495214783159-3503fd1b572d?w=400&h=300&fit=crop',
         categoryId: 'porridge',
     },
     {
@@ -134,7 +134,7 @@ const dishes: Dish[] = [
         description: 'Молоко (коровье / кокосовое) · рис жасмин · манго',
         weight: '300 г',
         price: 100,
-        photo: 'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=400&h=300&fit=crop',
+        photo: 'https://images.unsplash.com/photo-1546548970-71785318a17b?w=400&h=300&fit=crop',
         categoryId: 'porridge',
     },
 ];

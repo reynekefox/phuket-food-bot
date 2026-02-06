@@ -98,7 +98,7 @@ const dishes: Dish[] = [
         description: '2 яйца · томаты · крем-сыр · оливки · овощной микс · хлеб',
         weight: '250 г',
         price: 170,
-        photo: 'https://images.unsplash.com/photo-1482049016gy-d6cc3cc402?w=400&h=300&fit=crop',
+        photo: 'https://images.unsplash.com/photo-1525351326368-6c6f4a5a85be?w=400&h=300&fit=crop',
         categoryId: 'breakfast',
     },
     // Pancakes - Блинчики

@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Category } from '../types';
 import { getCategories } from '../api/dishes';
+import { getCategoryName, getLanguage, Language } from '../i18n';
 
 const Categories = () => {
     const [categories, setCategories] = useState<Category[]>([]);
     const [loading, setLoading] = useState(true);
+    const [lang, setLang] = useState<Language>(getLanguage());
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -13,6 +15,12 @@ const Categories = () => {
             setCategories(data);
             setLoading(false);
         });
+    }, []);
+
+    useEffect(() => {
+        const handleLangChange = () => setLang(getLanguage());
+        window.addEventListener('languageChange', handleLangChange);
+        return () => window.removeEventListener('languageChange', handleLangChange);
     }, []);
 
     if (loading) {
@@ -31,9 +39,9 @@ const Categories = () => {
                     className="category-card"
                     onClick={() => navigate(`/category/${category.id}`)}
                 >
-                    <img src={category.cover} alt={category.name} />
+                    <img src={category.cover} alt={getCategoryName(category.id, lang)} />
                     <div className="overlay">
-                        <h3>{category.name}</h3>
+                        <h3>{getCategoryName(category.id, lang)}</h3>
                     </div>
                 </div>
             ))}

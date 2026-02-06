@@ -3,6 +3,7 @@ import Categories from './components/Categories';
 import DishList from './components/DishList';
 import Cart from './components/Cart';
 import CartFab from './components/CartFab';
+import LanguageSwitcher from './components/LanguageSwitcher';
 import { useTelegram } from './hooks/useTelegram';
 
 const AppContent = () => {
@@ -17,7 +18,8 @@ const AppContent = () => {
                     element={
                         <>
                             <div className="header">
-                                <h1>🍜 Phuket Food</h1>
+                                <h1>🕊️ Nest Cafe</h1>
+                                <LanguageSwitcher />
                             </div>
                             <Categories />
                         </>

@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCartStore } from '../store/cartStore';
 import { useTelegram } from '../hooks/useTelegram';
 import { submitOrder } from '../api/dishes';
+import { getDishName, t, getLanguage, Language } from '../i18n';
 
 const Cart = () => {
     const navigate = useNavigate();
     const { user, close } = useTelegram();
     const { items, updateQuantity, removeItem, getTotalPrice, clearCart } = useCartStore();
+    const [lang, setLang] = useState<Language>(getLanguage());
 
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
@@ -18,11 +20,17 @@ const Cart = () => {
 
     const totalPrice = getTotalPrice();
 
+    useEffect(() => {
+        const handleLangChange = () => setLang(getLanguage());
+        window.addEventListener('languageChange', handleLangChange);
+        return () => window.removeEventListener('languageChange', handleLangChange);
+    }, []);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!phone || !address) {
-            setError('Заполните телефон и адрес');
+            setError(lang === 'ru' ? 'Заполните телефон и адрес' : 'Please fill in phone and address');
             return;
         }
 
@@ -50,7 +58,9 @@ const Cart = () => {
                 close();
             }, 3000);
         } catch (err) {
-            setError('Ошибка при оформлении заказа. Попробуйте снова.');
+            setError(lang === 'ru'
+                ? 'Ошибка при оформлении заказа. Попробуйте снова.'
+                : 'Error placing order. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -61,8 +71,10 @@ const Cart = () => {
             <div className="success-overlay">
                 <div className="success-modal">
                     <span>✅</span>
-                    <h2>Заказ оформлен!</h2>
-                    <p>Ожидайте подтверждения. Курьер свяжется с вами.</p>
+                    <h2>{lang === 'ru' ? 'Заказ оформлен!' : 'Order placed!'}</h2>
+                    <p>{lang === 'ru'
+                        ? 'Ожидайте подтверждения. Курьер свяжется с вами.'
+                        : 'Waiting for confirmation. Courier will contact you.'}</p>
                 </div>
             </div>
         );
@@ -76,24 +88,24 @@ const Cart = () => {
                 <button className="back-btn" onClick={() => navigate('/')}>
                     ←
                 </button>
-                <h1>Корзина</h1>
+                <h1>{t('cart', lang)}</h1>
             </div>
 
             <div className="cart">
                 {isEmpty ? (
                     <div className="empty-state">
                         <span>🛒</span>
-                        <p>Корзина пуста</p>
-                        <p>Добавьте блюда из меню</p>
+                        <p>{t('emptyCart', lang)}</p>
+                        <p>{lang === 'ru' ? 'Добавьте блюда из меню' : 'Add dishes from menu'}</p>
                     </div>
                 ) : (
                     <>
                         <div className="cart-items">
                             {items.map((item) => (
                                 <div key={item.dish.id} className="cart-item">
-                                    <img src={item.dish.photo} alt={item.dish.name} />
+                                    <img src={item.dish.photo} alt={getDishName(item.dish.id, lang)} />
                                     <div className="cart-item-info">
-                                        <h4>{item.dish.name}</h4>
+                                        <h4>{getDishName(item.dish.id, lang)}</h4>
                                         <span className="cart-item-price">{item.dish.price * item.quantity} ฿</span>
                                     </div>
                                     <div className="quantity-controls">
@@ -122,12 +134,12 @@ const Cart = () => {
                         </div>
 
                         <div className="total-section">
-                            <span className="total-label">Итого:</span>
+                            <span className="total-label">{t('total', lang)}:</span>
                             <span className="total-amount">{totalPrice} ฿</span>
                         </div>
 
                         <form className="order-form" onSubmit={handleSubmit}>
-                            <h3>Данные для доставки</h3>
+                            <h3>{lang === 'ru' ? 'Данные для доставки' : 'Delivery details'}</h3>
 
                             {error && (
                                 <div style={{ color: '#dc3545', marginBottom: '16px', fontSize: '14px' }}>
@@ -136,7 +148,7 @@ const Cart = () => {
                             )}
 
                             <div className="form-group">
-                                <label htmlFor="phone">Телефон *</label>
+                                <label htmlFor="phone">{t('phone', lang)} *</label>
                                 <input
                                     id="phone"
                                     type="tel"
@@ -148,11 +160,11 @@ const Cart = () => {
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="address">Адрес доставки *</label>
+                                <label htmlFor="address">{t('address', lang)} *</label>
                                 <input
                                     id="address"
                                     type="text"
-                                    placeholder="Улица, дом, квартира"
+                                    placeholder={lang === 'ru' ? 'Улица, дом, квартира' : 'Street, building, apartment'}
                                     value={address}
                                     onChange={(e) => setAddress(e.target.value)}
                                     required
@@ -160,17 +172,19 @@ const Cart = () => {
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="comment">Комментарий</label>
+                                <label htmlFor="comment">{t('comment', lang)}</label>
                                 <textarea
                                     id="comment"
-                                    placeholder="Пожелания к заказу (необязательно)"
+                                    placeholder={lang === 'ru' ? 'Пожелания к заказу (необязательно)' : 'Order notes (optional)'}
                                     value={comment}
                                     onChange={(e) => setComment(e.target.value)}
                                 />
                             </div>
 
                             <button type="submit" className="submit-btn" disabled={loading}>
-                                {loading ? 'Оформляем...' : `Заказать за ${totalPrice} ฿`}
+                                {loading
+                                    ? (lang === 'ru' ? 'Оформляем...' : 'Processing...')
+                                    : (lang === 'ru' ? `Заказать за ${totalPrice} ฿` : `Order for ${totalPrice} ฿`)}
                             </button>
                         </form>
                     </>

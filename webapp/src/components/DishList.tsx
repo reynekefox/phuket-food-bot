@@ -3,18 +3,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Dish } from '../types';
 import { getDishes } from '../api/dishes';
 import DishCard from './DishCard';
-
-const categoryNames: Record<string, string> = {
-    breakfast: '🍳 Завтраки',
-    pancakes: '🥞 Блинчики',
-    syrniki: '🧀 Сырники',
-    porridge: '🥣 Каши',
-};
+import { getCategoryName, t, getLanguage, Language } from '../i18n';
 
 const DishList = () => {
     const { categoryId } = useParams<{ categoryId: string }>();
     const [dishes, setDishes] = useState<Dish[]>([]);
     const [loading, setLoading] = useState(true);
+    const [lang, setLang] = useState<Language>(getLanguage());
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -26,6 +21,12 @@ const DishList = () => {
         }
     }, [categoryId]);
 
+    useEffect(() => {
+        const handleLangChange = () => setLang(getLanguage());
+        window.addEventListener('languageChange', handleLangChange);
+        return () => window.removeEventListener('languageChange', handleLangChange);
+    }, []);
+
     if (loading) {
         return (
             <div className="loading">
@@ -34,7 +35,7 @@ const DishList = () => {
         );
     }
 
-    const categoryName = categoryId ? categoryNames[categoryId] || 'Меню' : 'Меню';
+    const categoryName = categoryId ? getCategoryName(categoryId, lang) : t('menu', lang);
 
     return (
         <>
@@ -48,7 +49,7 @@ const DishList = () => {
                 {dishes.length === 0 ? (
                     <div className="empty-state">
                         <span>🍽</span>
-                        <p>В этой категории пока нет блюд</p>
+                        <p>{t('noDishes', lang)}</p>
                     </div>
                 ) : (
                     dishes.map((dish) => <DishCard key={dish.id} dish={dish} />)

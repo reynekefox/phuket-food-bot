@@ -5,6 +5,10 @@ import { getDishes } from '../api/dishes';
 import DishCard from './DishCard';
 
 const categoryNames: Record<string, string> = {
+    breakfast: '🍳 Завтраки',
+    pancakes: '🥞 Блинчики',
+    syrniki: '🧀 Сырники',
+    porridge: '🥣 Каши',
     soups: 'Супы',
     main: 'Горячие блюда',
     noodles: 'Лапша',

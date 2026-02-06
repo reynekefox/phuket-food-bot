@@ -32,11 +32,11 @@ export const translations = {
         location: `
 📍 *Наша локация*
 
-🏠 Адрес: Phuket Town, Thalang Road 123
-📞 Телефон: +66 XX XXX XXXX
+🏠 Адрес: 6, 17 Rasadanusorn Rd, Tambon Ratsada, Mueang Phuket District, Phuket 83000
+📞 Телефон: +66 617866071
 
 🕐 Время работы:
-Пн-Вс: 10:00 - 22:00
+Пн-Вс: 09:00 - 21:00
 `,
         delivery: `
 🚚 *Информация о доставке*
@@ -95,11 +95,11 @@ Tap *Menu* to choose your dishes, or explore the other sections below 👇
         location: `
 📍 *Our Location*
 
-🏠 Address: Phuket Town, Thalang Road 123
-📞 Phone: +66 XX XXX XXXX
+🏠 Address: 6, 17 Rasadanusorn Rd, Tambon Ratsada, Mueang Phuket District, Phuket 83000
+📞 Phone: +66 617866071
 
 🕐 Working hours:
-Mon-Sun: 10:00 - 22:00
+Mon-Sun: 09:00 - 21:00
 `,
         delivery: `
 🚚 *Delivery Information*

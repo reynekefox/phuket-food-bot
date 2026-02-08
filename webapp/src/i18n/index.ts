@@ -16,7 +16,7 @@ export const setLanguage = (lang: Language): void => {
 export const categoryTranslations: Record<string, Record<Language, string>> = {
     // Top-level
     breakfast: { ru: '🥞 Завтраки', en: '🥞 Breakfast' },
-    poke: { ru: '🥗 Поке', en: '🥗 Poke' },
+    poke: { ru: '🥗 Поке боулы', en: '🥗 Poke Bowls' },
     toasts: { ru: '🥪 Тосты', en: '🥪 Toasts' },
     salads: { ru: '🥬 Салаты', en: '🥬 Salads' },
     soups: { ru: '🍲 Супы', en: '🍲 Soups' },

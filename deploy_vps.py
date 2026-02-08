@@ -8,6 +8,10 @@ import paramiko
 import time
 import sys
 
+# Fix Windows console encoding for Unicode (PM2 outputs ✓ etc.)
+sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+
 # VPS Connection Details
 VPS_HOST = "109.73.199.60"
 VPS_USER = "root"

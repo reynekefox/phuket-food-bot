@@ -35,7 +35,7 @@ const DishCard = ({ dish }: DishCardProps) => {
 
     return (
         <div className="dish-card">
-            <img src={dish.photo} alt={name} className="dish-image" />
+            {dish.photo && <img src={dish.photo} alt={name} className="dish-image" />}
             <div className="dish-info">
                 <h3>{name}</h3>
                 <p className="dish-description">{description}</p>

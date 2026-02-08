@@ -142,8 +142,13 @@ export const dishes: Dish[] = [
     { id: 'matcha-lemon-soda', name: 'Матча-лимонная сода', description: '', weight: '', price: 120, photo: 'https://images.unsplash.com/photo-1598918237279-373b75ab9693?w=400&h=300&fit=crop', categoryId: 'specialty-coffee' },
     // Tea, Juices, Shakes, Lemonades, Mocktails, Soft Drinks — all IDs and prices match frontend
     { id: 'black-tea', name: 'Чёрный чай', description: '', weight: '300 мл', price: 80, photo: 'https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?w=400&h=300&fit=crop', categoryId: 'tea-bags' },
-    { id: 'water', name: 'Вода', description: '', weight: '500 мл', price: 30, photo: 'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=400&h=300&fit=crop', categoryId: 'soft-drinks' },
-    { id: 'coca-cola', name: 'Coca-Cola', description: '', weight: '330 мл', price: 50, photo: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&h=300&fit=crop', categoryId: 'soft-drinks' },
+    { id: 'water', name: 'Water', description: '', weight: '500 ml', price: 30, photo: '', categoryId: 'soft-drinks' },
+    { id: 'soda-water', name: 'Soda water', description: '', weight: '330 ml', price: 30, photo: '', categoryId: 'soft-drinks' },
+    { id: 'singha-lemon-soda', name: 'Singha Red Lemon Soda', description: '', weight: '330 ml', price: 40, photo: '', categoryId: 'soft-drinks' },
+    { id: 'schweppes-tonic', name: 'Schweppes Tonic Water', description: '', weight: '330 ml', price: 40, photo: '', categoryId: 'soft-drinks' },
+    { id: 'sprite', name: 'Sprite', description: '', weight: '330 ml', price: 50, photo: '', categoryId: 'soft-drinks' },
+    { id: 'coca-cola', name: 'Coca-Cola (Original/Zero)', description: '', weight: '330 ml', price: 50, photo: '', categoryId: 'soft-drinks' },
+    { id: 'fanta-orange', name: 'Fanta Orange', description: '', weight: '330 ml', price: 50, photo: '', categoryId: 'soft-drinks' },
 ];
 
 // In-memory orders storage

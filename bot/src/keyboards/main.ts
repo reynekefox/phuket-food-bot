@@ -23,7 +23,7 @@ export const mainKeyboard = (userId: number) => {
             Markup.button.callback(buttons.payment, 'payment'),
         ],
         [
-            Markup.button.url(buttons.instagram, 'https://instagram.com/your_account'),
+            Markup.button.url(buttons.instagram, 'https://www.instagram.com/nestcafe_phuket?igsh=MW5iMmhiNXBmMm4yeA=='),
             Markup.button.callback(buttons.contact, 'contact'),
         ],
     ]);

@@ -52,7 +52,7 @@ export const handleContact = async (ctx: Context) => {
     if (!userId) return;
 
     await ctx.answerCbQuery();
-    await ctx.editMessageText('💬 *Связаться с менеджером / Contact Manager*\n\nНапишите нам: @your_manager\nContact us: @your_manager', {
+    await ctx.editMessageText('💬 *Связаться с менеджером / Contact Manager*\n\nНапишите нам: @nestcafe\\_phuket\nContact us: @nestcafe\\_phuket', {
         parse_mode: 'Markdown',
         ...backKeyboard(userId),
     });

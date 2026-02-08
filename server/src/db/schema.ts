@@ -12,6 +12,7 @@ export interface Category {
     id: string;
     name: string;
     cover: string;
+    parentId?: string;
 }
 
 export interface OrderItem {
@@ -32,32 +33,118 @@ export interface Order {
     createdAt: Date;
 }
 
-// Demo data
+// Demo data — categories
 export const categories: Category[] = [
-    { id: 'breakfast', name: '🍳 Завтраки', cover: 'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400&h=300&fit=crop' },
-    { id: 'pancakes', name: '🥞 Блинчики', cover: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop' },
-    { id: 'syrniki', name: '🧀 Сырники', cover: 'https://images.unsplash.com/photo-1565299543923-37dd37887442?w=400&h=300&fit=crop' },
-    { id: 'porridge', name: '🥣 Каши', cover: 'https://images.unsplash.com/photo-1517673400267-0251440c45dc?w=400&h=300&fit=crop' },
+    // Top-level
+    { id: 'breakfast', name: '🥞 Завтраки', cover: 'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400&h=300&fit=crop' },
+    { id: 'poke', name: '🥗 Поке', cover: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop' },
+    { id: 'toasts', name: '🥪 Тосты', cover: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&h=300&fit=crop' },
+    { id: 'salads', name: '🥬 Салаты', cover: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop' },
+    { id: 'soups', name: '🍲 Супы', cover: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=300&fit=crop' },
+    { id: 'hot-dishes', name: '🍛 Горячие блюда', cover: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop' },
+    { id: 'sides', name: '🍚 Гарниры', cover: 'https://images.unsplash.com/photo-1536304929831-ee1ca9d44726?w=400&h=300&fit=crop' },
+    { id: 'desserts', name: '🍰 Десерты', cover: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&h=300&fit=crop' },
+    { id: 'drinks', name: '🥤 Напитки', cover: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop' },
+    // Breakfast subs
+    { id: 'eggs', name: '🍳 Яичные блюда', cover: 'https://images.unsplash.com/photo-1510693206972-df098062cb71?w=400&h=300&fit=crop', parentId: 'breakfast' },
+    { id: 'pancakes', name: '🥞 Блинчики', cover: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop', parentId: 'breakfast' },
+    { id: 'syrniki', name: '🧀 Сырники', cover: 'https://images.unsplash.com/photo-1565299543923-37dd37887442?w=400&h=300&fit=crop', parentId: 'breakfast' },
+    { id: 'porridge', name: '🥣 Каши', cover: 'https://images.unsplash.com/photo-1517673400267-0251440c45dc?w=400&h=300&fit=crop', parentId: 'breakfast' },
+    // Poke subs
+    { id: 'poke-bowls', name: '🥗 Поке боулы', cover: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop', parentId: 'poke' },
+    { id: 'yogurt-bowls', name: '🍓 Йогурт-боулы', cover: 'https://images.unsplash.com/photo-1511690743698-d9d18f7e20f1?w=400&h=300&fit=crop', parentId: 'poke' },
+    // Drinks subs
+    { id: 'classic-coffee', name: '☕ Классический кофе', cover: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop', parentId: 'drinks' },
+    { id: 'specialty-coffee', name: '☕ Specialty кофе', cover: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop', parentId: 'drinks' },
+    { id: 'tea-bags', name: '🍵 Чай в пакетиках', cover: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&h=300&fit=crop', parentId: 'drinks' },
+    { id: 'teapot', name: '🫖 Чайник', cover: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop', parentId: 'drinks' },
+    { id: 'detox-juice', name: '🥤 Detox соки', cover: 'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=400&h=300&fit=crop', parentId: 'drinks' },
+    { id: 'fresh-juice', name: '🍊 Свежевыжатые соки', cover: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?w=400&h=300&fit=crop', parentId: 'drinks' },
+    { id: 'shakes', name: '🥤 Шейки', cover: 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400&h=300&fit=crop', parentId: 'drinks' },
+    { id: 'lemonade', name: '🍋 Домашние лимонады', cover: 'https://images.unsplash.com/photo-1621263764928-df1444c5e859?w=400&h=300&fit=crop', parentId: 'drinks' },
+    { id: 'mocktails', name: '🍹 Моктейли', cover: 'https://images.unsplash.com/photo-1536935338788-846bb9981813?w=400&h=300&fit=crop', parentId: 'drinks' },
+    { id: 'soft-drinks', name: '🥤 Безалкогольные напитки', cover: 'https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=400&h=300&fit=crop', parentId: 'drinks' },
 ];
 
+// Demo data — dishes (abbreviated for server; full list matches frontend)
 export const dishes: Dish[] = [
-    // Завтраки
-    { id: 'english-breakfast', name: 'Английский завтрак', description: '2 яйца · бекон · 2 сосиски · овощной микс (салат) · хлеб', weight: '350 г', price: 190, photo: 'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400&h=300&fit=crop', categoryId: 'breakfast' },
-    { id: 'scramble', name: 'Скрэмбл', description: '2 яйца · овощной микс (салат) · хлеб', weight: '200 г', price: 140, photo: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&h=300&fit=crop', categoryId: 'breakfast' },
-    { id: 'vegetable-omelette', name: 'Омлет с овощами', description: '2 яйца · томаты · болгарский перец · репчатый лук · овощной микс · хлеб', weight: '250 г', price: 140, photo: 'https://images.unsplash.com/photo-1510693206972-df098062cb71?w=400&h=300&fit=crop', categoryId: 'breakfast' },
-    { id: 'ham-cheese-omelette', name: 'Омлет с ветчиной и сыром', description: '2 яйца · ветчина · сыр · овощной микс · хлеб', weight: '250 г', price: 170, photo: 'https://images.unsplash.com/photo-1612240498936-65f5101365d2?w=400&h=300&fit=crop', categoryId: 'breakfast' },
-    { id: 'greek-omelette', name: 'Омлет по-гречески', description: '2 яйца · томаты · крем-сыр · оливки · овощной микс · хлеб', weight: '250 г', price: 170, photo: 'https://images.unsplash.com/photo-1525351326368-6c6f4a5a85be?w=400&h=300&fit=crop', categoryId: 'breakfast' },
-    // Блинчики
-    { id: 'pancakes-toppings', name: 'Блинчики с топпингами', description: '3 шт. · 2 топпинга на выбор: сметана / клубничный джем / шоколадный соус / мёд / кленовый сироп', weight: '200 г', price: 140, photo: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop', categoryId: 'pancakes' },
-    { id: 'pancakes-cottage-cheese', name: 'Блинчики с творогом', description: '2 шт. · домашний творог · сметана · микс свежих ягод', weight: '250 г', price: 260, photo: 'https://images.unsplash.com/photo-1519676867240-f03562e64548?w=400&h=300&fit=crop', categoryId: 'pancakes' },
-    { id: 'pancakes-ham-cheese', name: 'Блинчики с ветчиной и сыром', description: '2 шт. · ветчина · сыр · зелень', weight: '220 г', price: 240, photo: 'https://images.unsplash.com/photo-1595981267035-d76e70e5e740?w=400&h=300&fit=crop', categoryId: 'pancakes' },
-    { id: 'pancakes-nutella-banana', name: 'Блинчики «Нутелла–банан»', description: '2 шт. · нутелла · банан · шоколадный соус', weight: '230 г', price: 240, photo: 'https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=400&h=300&fit=crop', categoryId: 'pancakes' },
-    // Сырники
-    { id: 'syrniki', name: 'Сырники', description: '3 шт. · домашний творог · микс свежих ягод · 2 топпинга на выбор', weight: '250 г', price: 180, photo: 'https://images.unsplash.com/photo-1565299543923-37dd37887442?w=400&h=300&fit=crop', categoryId: 'syrniki' },
-    // Каши
-    { id: 'oatmeal', name: 'Овсяная каша', description: 'Молоко (коровье / кокосовое) · овсянка · микс свежих ягод', weight: '300 г', price: 100, photo: 'https://images.unsplash.com/photo-1495214783159-3503fd1b572d?w=400&h=300&fit=crop', categoryId: 'porridge' },
-    { id: 'rice-porridge', name: 'Рисовая каша', description: 'Молоко (коровье / кокосовое) · рис жасмин · манго', weight: '300 г', price: 100, photo: 'https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?w=400&h=300&fit=crop', categoryId: 'porridge' },
+    // Eggs
+    { id: 'english-breakfast', name: 'Английский завтрак', description: '2 яйца · бекон · 2 сосиски · овощной микс (салат) · хлеб', weight: '350 г', price: 190, photo: '', categoryId: 'eggs' },
+    { id: 'scramble', name: 'Скрэмбл', description: '2 яйца · овощной микс (салат) · хлеб', weight: '200 г', price: 140, photo: '', categoryId: 'eggs' },
+    { id: 'vegetable-omelette', name: 'Омлет с овощами', description: '2 яйца · томаты · болгарский перец · репчатый лук · овощной микс · хлеб', weight: '250 г', price: 140, photo: '', categoryId: 'eggs' },
+    { id: 'ham-cheese-omelette', name: 'Омлет с ветчиной и сыром', description: '2 яйца · ветчина · сыр · овощной микс · хлеб', weight: '250 г', price: 170, photo: '', categoryId: 'eggs' },
+    { id: 'greek-omelette', name: 'Омлет по-гречески', description: '2 яйца · томаты · крем-сыр · оливки · овощной микс · хлеб', weight: '250 г', price: 170, photo: '', categoryId: 'eggs' },
+    // Pancakes
+    { id: 'pancakes-toppings', name: 'Блинчики с топпингами', description: '3 шт. · 2 топпинга на выбор', weight: '200 г', price: 140, photo: '', categoryId: 'pancakes' },
+    { id: 'pancakes-cottage-cheese', name: 'Блинчики с творогом', description: '2 шт. · домашний творог · сметана · микс свежих ягод', weight: '250 г', price: 260, photo: '', categoryId: 'pancakes' },
+    { id: 'pancakes-ham-cheese', name: 'Блинчики с ветчиной и сыром', description: '2 шт. · ветчина · сыр · зелень', weight: '220 г', price: 240, photo: '', categoryId: 'pancakes' },
+    { id: 'pancakes-nutella-banana', name: 'Блинчики «Нутелла–банан»', description: '2 шт. · нутелла · банан · шоколадный соус', weight: '230 г', price: 240, photo: '', categoryId: 'pancakes' },
+    // Syrniki
+    { id: 'syrniki-dish', name: 'Сырники', description: '3 шт. · домашний творог · микс свежих ягод · 2 топпинга на выбор', weight: '250 г', price: 180, photo: '', categoryId: 'syrniki' },
+    // Porridge
+    { id: 'oatmeal', name: 'Овсяная каша', description: 'Молоко · овсянка · микс свежих ягод', weight: '300 г', price: 100, photo: '', categoryId: 'porridge' },
+    { id: 'rice-porridge', name: 'Рисовая каша', description: 'Молоко · рис жасмин · манго', weight: '300 г', price: 100, photo: '', categoryId: 'porridge' },
+    // Poke Bowls
+    { id: 'shrimp-bowl', name: 'Боул с креветками', description: 'Рис жасмин · креветки · шпинат · овощи · кунжут', weight: '350 г', price: 290, photo: '', categoryId: 'poke-bowls' },
+    { id: 'chicken-bowl', name: 'Боул с курицей', description: 'Рис жасмин · курица гриль · шпинат · овощи · кунжут', weight: '350 г', price: 180, photo: '', categoryId: 'poke-bowls' },
+    { id: 'salmon-bowl', name: 'Боул с лососем', description: 'Рис жасмин · лосось гриль · шпинат · овощи · кунжут', weight: '350 г', price: 300, photo: '', categoryId: 'poke-bowls' },
+    // Yogurt Bowls
+    { id: 'berry-yogurt', name: 'Ягодный микс', description: 'Греческий йогурт · клубника · голубика · гранат · мюсли · чиа · мёд', weight: '300 г', price: 290, photo: '', categoryId: 'yogurt-bowls' },
+    { id: 'tropical-yogurt', name: 'Тропический', description: 'Греческий йогурт · манго · банан · киви · кокос · миндаль · мюсли · мёд', weight: '300 г', price: 260, photo: '', categoryId: 'yogurt-bowls' },
+    { id: 'nutella-banana-yogurt', name: 'Нутелла-банан', description: 'Греческий йогурт · банан · ананас · гранола · миндаль · шоколадный сироп', weight: '300 г', price: 290, photo: '', categoryId: 'yogurt-bowls' },
+    // Toasts
+    { id: 'avocado-toast', name: 'Авокадо тост', description: 'Хлеб · крем-чиз · авокадо · лимонный сок · оливковое масло', weight: '200 г', price: 140, photo: '', categoryId: 'toasts' },
+    { id: 'avocado-salmon-toast', name: 'Авокадо тост с лососем', description: 'Хлеб · крем-чиз · руккола · авокадо · лосось · каперсы · яйца', weight: '250 г', price: 220, photo: '', categoryId: 'toasts' },
+    { id: 'chicken-pesto-toast', name: 'Тост с курицей и песто', description: 'Хлеб · крем-чиз · авокадо · курица · песто · черри · руккола', weight: '230 г', price: 180, photo: '', categoryId: 'toasts' },
+    { id: 'caprese-toast', name: 'Тост Капрезе', description: 'Хлеб · оливковое масло · моцарелла · томаты · базилик', weight: '220 г', price: 210, photo: '', categoryId: 'toasts' },
+    // Salads
+    { id: 'arugula-shrimp-mango', name: 'Салат с рукколой, креветками и манго', description: 'Руккола · креветки · манго · мёд · чеснок · оливковое масло · лайм · кунжут', weight: '300 г', price: 280, photo: '', categoryId: 'salads' },
+    { id: 'beef-arugula-spinach', name: 'Салат с говядиной, рукколой и шпинатом', description: 'Руккола · шпинат · говядина · черри · пармезан · бальзамик', weight: '300 г', price: 280, photo: '', categoryId: 'salads' },
+    { id: 'caesar-chicken', name: 'Цезарь с курицей', description: 'Курица гриль · романо · черри · пармезан · гренки · соус цезарь', weight: '300 г', price: 260, photo: '', categoryId: 'salads' },
+    { id: 'caesar-shrimp', name: 'Цезарь с креветками', description: 'Креветки · романо · черри · пармезан · гренки · соус цезарь', weight: '300 г', price: 260, photo: '', categoryId: 'salads' },
+    { id: 'greek-salad', name: 'Салат «Греческий»', description: 'Перец · огурец · черри · лук · оливки · фета · оливковое масло', weight: '280 г', price: 240, photo: '', categoryId: 'salads' },
+    // Soups
+    { id: 'borscht', name: 'Борщ', description: 'Свёкла · картофель · морковь · лук · томаты · чеснок · говядина · сметана', weight: '350 г', price: 240, photo: '', categoryId: 'soups' },
+    { id: 'chicken-meatball-soup', name: 'Куриный суп с фрикадельками', description: 'Картофель · морковь · лук · укроп · фрикадельки · сметана', weight: '350 г', price: 180, photo: '', categoryId: 'soups' },
+    { id: 'shchi', name: 'Щи из свежей капусты', description: 'Капуста · картофель · морковь · лук · курица · укроп · сметана', weight: '350 г', price: 220, photo: '', categoryId: 'soups' },
+    // Hot Dishes
+    { id: 'chicken-cutlets', name: 'Куриные котлеты с пюре (2 шт.)', description: 'Куриный фарш · лук · чеснок · яйцо · пюре', weight: '350 г', price: 160, photo: '', categoryId: 'hot-dishes' },
+    { id: 'fish-cutlets', name: 'Рыбные котлеты с пюре (2 шт.)', description: 'Фарш из сёмги · лук · чеснок · яйцо · пюре', weight: '350 г', price: 190, photo: '', categoryId: 'hot-dishes' },
+    { id: 'grilled-chicken', name: 'Куриное филе гриль', description: 'Куриное филе гриль · овощи · сырный соус', weight: '350 г', price: 260, photo: '', categoryId: 'hot-dishes' },
+    { id: 'grilled-salmon', name: 'Лосось гриль', description: 'Лосось гриль · овощи · сливочно-лимонный соус', weight: '350 г', price: 380, photo: '', categoryId: 'hot-dishes' },
+    { id: 'sweet-sour-chicken', name: 'Курица в кисло-сладком соусе', description: 'Куриное филе · перец · лук · ананасы · кисло-сладкий соус · кунжут', weight: '300 г', price: 190, photo: '', categoryId: 'hot-dishes' },
+    // Drinks — all subcategories have dishes in frontend, server just mirrors IDs/prices
+    { id: 'espresso', name: 'Эспрессо', description: '', weight: '', price: 60, photo: '', categoryId: 'classic-coffee' },
+    { id: 'americano', name: 'Американо', description: '', weight: '', price: 60, photo: '', categoryId: 'classic-coffee' },
+    { id: 'cappuccino', name: 'Капучино', description: '', weight: '', price: 80, photo: '', categoryId: 'classic-coffee' },
+    { id: 'frappuccino', name: 'Фрапучино', description: '', weight: '', price: 110, photo: '', categoryId: 'classic-coffee' },
+    { id: 'macchiato', name: 'Макиато', description: '', weight: '', price: 80, photo: '', categoryId: 'classic-coffee' },
+    { id: 'latte', name: 'Латте', description: '', weight: '', price: 90, photo: '', categoryId: 'classic-coffee' },
+    { id: 'flat-white', name: 'Флэт уайт', description: '', weight: '', price: 110, photo: '', categoryId: 'classic-coffee' },
+    { id: 'mocha', name: 'Мокка', description: '', weight: '', price: 110, photo: '', categoryId: 'classic-coffee' },
+    { id: 'raf', name: 'Раф', description: '', weight: '', price: 110, photo: '', categoryId: 'classic-coffee' },
+    { id: 'cocoa', name: 'Какао', description: '', weight: '', price: 100, photo: '', categoryId: 'classic-coffee' },
+    { id: 'matcha-latte', name: 'Классический матча-латте', description: '', weight: '', price: 120, photo: '', categoryId: 'classic-coffee' },
+    // Specialty Coffee
+    { id: 'orange-americano', name: 'Апельсиновый американо', description: '', weight: '', price: 120, photo: '', categoryId: 'specialty-coffee' },
+    { id: 'coconut-americano', name: 'Кокосовый американо', description: '', weight: '', price: 120, photo: '', categoryId: 'specialty-coffee' },
+    { id: 'tonic-americano', name: 'Тоник американо', description: '', weight: '', price: 120, photo: '', categoryId: 'specialty-coffee' },
+    { id: 'honey-lemon-americano', name: 'Американо с мёдом и лимоном', description: '', weight: '', price: 120, photo: '', categoryId: 'specialty-coffee' },
+    { id: 'caramel-latte', name: 'Карамельный латте', description: '', weight: '', price: 120, photo: '', categoryId: 'specialty-coffee' },
+    { id: 'berry-latte', name: 'Ягодный латте', description: '', weight: '', price: 120, photo: '', categoryId: 'specialty-coffee' },
+    { id: 'coconut-latte', name: 'Кокосовый латте', description: '', weight: '', price: 120, photo: '', categoryId: 'specialty-coffee' },
+    { id: 'choco-mint-latte', name: 'Шоколадно-мятный латте', description: '', weight: '', price: 120, photo: '', categoryId: 'specialty-coffee' },
+    { id: 'caramel-macchiato', name: 'Карамельный макиато', description: '', weight: '', price: 120, photo: '', categoryId: 'specialty-coffee' },
+    { id: 'mint-mocha', name: 'Мятный мокка', description: '', weight: '', price: 120, photo: '', categoryId: 'specialty-coffee' },
+    { id: 'affogato', name: 'Аффогато с кокосовым мороженым', description: '', weight: '', price: 120, photo: '', categoryId: 'specialty-coffee' },
+    { id: 'cocoa-marshmallow', name: 'Какао с маршмеллоу', description: '', weight: '', price: 120, photo: '', categoryId: 'specialty-coffee' },
+    { id: 'cocoa-raspberry-latte', name: 'Какао-малиновый латте', description: '', weight: '', price: 120, photo: '', categoryId: 'specialty-coffee' },
+    { id: 'matcha-lemon-soda', name: 'Матча-лимонная сода', description: '', weight: '', price: 120, photo: '', categoryId: 'specialty-coffee' },
+    // Tea, Juices, Shakes, Lemonades, Mocktails, Soft Drinks — all IDs and prices match frontend
+    { id: 'black-tea', name: 'Чёрный чай', description: '', weight: '300 мл', price: 80, photo: '', categoryId: 'tea-bags' },
+    { id: 'water', name: 'Вода', description: '', weight: '500 мл', price: 30, photo: '', categoryId: 'soft-drinks' },
+    { id: 'coca-cola', name: 'Coca-Cola', description: '', weight: '330 мл', price: 50, photo: '', categoryId: 'soft-drinks' },
 ];
 
-// In-memory orders storage (use database in production)
+// In-memory orders storage
 export const orders: Order[] = [];

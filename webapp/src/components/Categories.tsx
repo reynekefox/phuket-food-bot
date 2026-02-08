@@ -4,18 +4,22 @@ import { Category } from '../types';
 import { getCategories } from '../api/dishes';
 import { getCategoryName, getLanguage, Language } from '../i18n';
 
-const Categories = () => {
+interface CategoriesProps {
+    parentId?: string;
+}
+
+const Categories = ({ parentId }: CategoriesProps) => {
     const [categories, setCategories] = useState<Category[]>([]);
     const [loading, setLoading] = useState(true);
     const [lang, setLang] = useState<Language>(getLanguage());
     const navigate = useNavigate();
 
     useEffect(() => {
-        getCategories().then((data) => {
+        getCategories(parentId).then((data) => {
             setCategories(data);
             setLoading(false);
         });
-    }, []);
+    }, [parentId]);
 
     useEffect(() => {
         const handleLangChange = () => setLang(getLanguage());

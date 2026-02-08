@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Categories from './components/Categories';
+import SubcategoryPage from './components/SubcategoryPage';
 import DishList from './components/DishList';
 import Cart from './components/Cart';
 import CartFab from './components/CartFab';
@@ -25,7 +26,8 @@ const AppContent = () => {
                         </>
                     }
                 />
-                <Route path="/category/:categoryId" element={<DishList />} />
+                <Route path="/category/:categoryId" element={<SubcategoryPage />} />
+                <Route path="/category/:parentCategoryId/:categoryId" element={<DishList />} />
                 <Route path="/cart" element={<Cart />} />
             </Routes>
             {showCartFab && <CartFab />}

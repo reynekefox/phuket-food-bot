@@ -6,7 +6,7 @@ import DishCard from './DishCard';
 import { getCategoryName, t, getLanguage, Language } from '../i18n';
 
 const DishList = () => {
-    const { categoryId } = useParams<{ categoryId: string }>();
+    const { categoryId, parentCategoryId } = useParams<{ categoryId: string; parentCategoryId?: string }>();
     const [dishes, setDishes] = useState<Dish[]>([]);
     const [loading, setLoading] = useState(true);
     const [lang, setLang] = useState<Language>(getLanguage());
@@ -27,6 +27,14 @@ const DishList = () => {
         return () => window.removeEventListener('languageChange', handleLangChange);
     }, []);
 
+    const handleBack = () => {
+        if (parentCategoryId) {
+            navigate(`/category/${parentCategoryId}`);
+        } else {
+            navigate('/');
+        }
+    };
+
     if (loading) {
         return (
             <div className="loading">
@@ -40,7 +48,7 @@ const DishList = () => {
     return (
         <>
             <div className="header">
-                <button className="back-btn" onClick={() => navigate('/')}>
+                <button className="back-btn" onClick={handleBack}>
                     ←
                 </button>
                 <h1>{categoryName}</h1>

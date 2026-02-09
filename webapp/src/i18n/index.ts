@@ -197,6 +197,12 @@ export const dishTranslations: Record<string, { name: Record<Language, string>; 
         name: { ru: 'Курица в кисло-сладком соусе', en: 'Sweet & Sour Chicken' },
         description: { ru: 'Куриное филе · болгарский перец · лук · ананасы · кисло-сладкий соус · кунжут', en: 'Chicken fillet · bell pepper · onion · pineapple · sweet & sour sauce · sesame' },
     },
+    // ═══════ Гарниры ═══════
+    'rice': { name: { ru: 'Рис', en: 'Rice' }, description: { ru: '', en: '' } },
+    'buckwheat': { name: { ru: 'Греча', en: 'Buckwheat' }, description: { ru: '', en: '' } },
+    'mashed-potatoes': { name: { ru: 'Картофельное пюре', en: 'Mashed Potatoes' }, description: { ru: '', en: '' } },
+    'grilled-vegetables': { name: { ru: 'Овощи гриль', en: 'Grilled Vegetables' }, description: { ru: '', en: '' } },
+    'steamed-vegetables': { name: { ru: 'Овощи на пару', en: 'Steamed Vegetables' }, description: { ru: '', en: '' } },
     // ═══════ Классический кофе ═══════
     'espresso': { name: { ru: 'Эспрессо', en: 'Espresso' }, description: { ru: '', en: '' } },
     'americano': { name: { ru: 'Американо', en: 'Americano' }, description: { ru: '', en: '' } },

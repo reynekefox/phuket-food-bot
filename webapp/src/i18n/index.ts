@@ -21,7 +21,7 @@ export const categoryTranslations: Record<string, Record<Language, string>> = {
     salads: { ru: '🥬 Салаты', en: '🥬 Salads' },
     soups: { ru: '🍲 Супы', en: '🍲 Soups' },
     'hot-dishes': { ru: '🍛 Горячие блюда', en: '🍛 Hot Dishes' },
-    sides: { ru: '🍚 Гарниры', en: '🍚 Side Dishes' },
+    sides: { ru: '🍚 Гарниры', en: '🍚 Sides' },
     desserts: { ru: '🍰 Десерты', en: '🍰 Desserts' },
     drinks: { ru: '🥤 Напитки', en: '🥤 Drinks' },
     // Breakfast subs
